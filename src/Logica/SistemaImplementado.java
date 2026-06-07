@@ -36,6 +36,12 @@ public class SistemaImplementado implements Sistema {
 		magos.add(new Mago(partes[0],partes[1]));
 		
 	}
+	public String mostrarMagos(int i) {
+		return i+") "+ magos.get(i).toString();
+	}
+	public int cantidadMagos() {
+		return magos.size();
+	}
 
 	@Override
 	public String mostrarHechizos(int i) {
@@ -44,6 +50,10 @@ public class SistemaImplementado implements Sistema {
 	@Override
 	public int cantidadHechizos() {
 		return hechizos.size();
+		
+	}
+	public int cantidadHechizos(int mago) {
+		return magos.get(mago).tamanioHechizosM();
 		
 	}
 	@Override
@@ -65,7 +75,7 @@ public class SistemaImplementado implements Sistema {
 		BufferedWriter escritor =new BufferedWriter(writerRegistro); //y se procede a recrear
 		escritor.write(nombreMago+";"+lineaHechizos);
 		escritor.close();
-		String[] partes =linea.split("🐟");
+		String[] partes =linea.split("🐟"); //??¿¿
 		for (int i=0; i<cantMagos;i++) {
 			recargarTxtMagos(partes[i]);
 		}
@@ -78,6 +88,12 @@ public class SistemaImplementado implements Sistema {
 		escritor.newLine();
 		escritor.write(linea);
 		escritor.close();
+		
+	}
+	
+	public void agregarHechizo(int mago,int hechizo) {
+		
+		magos.get(mago).getHechizosM().add(hechizos.get(hechizo).getNombre());
 		
 	}
 

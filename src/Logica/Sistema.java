@@ -27,12 +27,15 @@ public interface Sistema {
 	void crearMago(String linea);
 	
 	void agregarMago(String nombreMago,String lineaHechizos, String linea) throws IOException;
-	
+	String mostrarMagos(int i);
 	String mostrarHechizos(int i);
 	
 	int cantidadHechizos();
 	
 	String unionHechizosMagos(String aniadirHechizo, String Linea);
+	
+	int cantidadMagos();
+	void agregarHechizo(int numeroMago, String aniadirHechizo);
 
 
 }
