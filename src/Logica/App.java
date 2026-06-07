@@ -148,6 +148,7 @@ public class App {
 				}
 				System.out.println("--------------------------------");
 				System.out.println("Cual hechizo desea añadir? ");
+				System.out.print(">");
 				String aniadirHechizo =s.nextLine();
 				
 				 
@@ -166,6 +167,10 @@ public class App {
 				if(Integer.parseInt(aniadirHechizo)!=0) {
 					System.out.println("se ha añadido " + sistema.mostrarHechizos(numeroHechizo));
 				}
+				
+			}else if (opcion==2) {
+				
+				
 				
 			}
 			
