@@ -16,7 +16,7 @@ public class SistemaImplementado implements Sistema {
 		String[] partes = linea.split(";");
 		//crea dependiendo del tipo
 		if(partes[1].equals("Agua")) {
-			String[] parteEspecifica = partes[3].split(","); //para la parte final que se dibide en 2 
+			String[] parteEspecifica = partes[3].split(","); //para la parte final que se divide en 2 
 			hechizos.add(new Agua(partes[0], partes[1], Integer.parseInt(partes[2]), Integer.parseInt(parteEspecifica[0]), Integer.parseInt(parteEspecifica[1])));
 		}
 		if(partes[1].equals("Fuego")) {
@@ -91,9 +91,38 @@ public class SistemaImplementado implements Sistema {
 		
 	}
 	
-	public void agregarHechizo(int mago,int hechizo) {
+	public void agregarHechizo(int numeroMago, int numeroHechizo) {
 		
-		magos.get(mago).getHechizosM().add(hechizos.get(hechizo).getNombre());
+		magos.get(numeroMago).agregarHechizo(hechizos.get(numeroHechizo).getNombre());
+		
+	}
+	public void modificarMago(int numeroMago, String nuevoHechizo, String linea) throws IOException {
+		magos.clear();
+		
+		FileWriter writerRegistro = new FileWriter("txts/Magos.txt"); 
+	    BufferedWriter escritor = new BufferedWriter(writerRegistro);
+	    escritor.close();
+	    
+	    String[] partes = linea.split("🐟");
+	    
+	    for (int i = 0; i < partes.length; i++) {
+	        String lineaMagoActual = partes[i];
+	        if (i == (numeroMago - 1)) {
+	        	lineaMagoActual = lineaMagoActual + "|" + nuevoHechizo;
+	        
+	        }
+	        
+	        recargarTxtMagos(lineaMagoActual, i == 0);
+	    }
+	}
+	private void recargarTxtMagos(String linea, boolean primerMago) throws IOException {
+		FileWriter writerRegistro = new FileWriter("txts/Magos.txt",true); //escibe más elementos
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		if (!primerMago) {
+	        escritor.newLine(); // 
+	    }//salta de linea
+		escritor.write(linea); //rescribe la linea que probiende de la funcion de los "🐟"
+		escritor.close();
 		
 	}
 

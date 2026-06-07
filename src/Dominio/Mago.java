@@ -24,6 +24,9 @@ public class Mago {
 		return hechizosM;
 	}
 
+	public void agregarHechizo(String hechizo) {
+		this.hechizosM.add(hechizo);
+	}
 	
 	
 	

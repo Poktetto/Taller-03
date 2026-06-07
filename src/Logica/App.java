@@ -149,11 +149,22 @@ public class App {
 				System.out.println("--------------------------------");
 				System.out.println("Cual hechizo desea añadir? ");
 				String aniadirHechizo =s.nextLine();
-				int numeroHechizo=	Integer.parseInt(aniadirHechizo);				//ciclo aniadicion de hechizos
-				sistema.agregarHechizo(numeroMago,aniadirHechizo); //falta arreglar, rompe las reglas, no lo hago ahora pq son las 5am :v
 				
+				 
+				
+				int numeroHechizo=	Integer.parseInt(aniadirHechizo)-1;				//ciclo aniadicion de hechizos
+				sistema.agregarHechizo(numeroMago,numeroHechizo);
+				 String linea = actualizarMagos();
+				  
+				  String nombreNuevoHechizo = sistema.mostrarHechizos(numeroHechizo);
+				  
+				  sistema.modificarMago(numeroMago, nombreNuevoHechizo, linea);
+				  
+				  cargarMagos();
+				  
+				  
 				if(Integer.parseInt(aniadirHechizo)!=0) {
-					System.out.println("se ha añadido " + sistema.mostrarHechizos(Integer.parseInt(aniadirHechizo)-1));
+					System.out.println("se ha añadido " + sistema.mostrarHechizos(numeroHechizo));
 				}
 				
 			}

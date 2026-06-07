@@ -35,7 +35,12 @@ public interface Sistema {
 	String unionHechizosMagos(String aniadirHechizo, String Linea);
 	
 	int cantidadMagos();
-	void agregarHechizo(int numeroMago, String aniadirHechizo);
+	
+	void agregarHechizo(int numeroMago, int aniadirHechizo);
+	
+	public void modificarMago(int numeroMago, String nuevoHechizo, String linea)throws IOException;
+	
+
 
 
 }
