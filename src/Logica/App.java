@@ -118,8 +118,9 @@ public class App {
 				if(Integer.parseInt(aniadirHechizo)!=0) {
 					System.out.println("se ha añadido " + sistema.mostrarHechizos(Integer.parseInt(aniadirHechizo)-1));
 				}
+				//toda esta parte "fea" es puro control de errores 
 			} while (Integer.parseInt(aniadirHechizo)>0 || Integer.parseInt(aniadirHechizo)>sistema.cantidadHechizos() || lineaHechizos==null);
-			sistema.agregarMago(nombreMago, lineaHechizos, actualizarMagos());
+			sistema.agregarMago(nombreMago, lineaHechizos, actualizarMagos()); //actualizar magos es todo el txt junto en forma de "🐟" esto solo se hace una vez
 			cargarMagos(); //para la lista en sistema
 		}
 		else if (respuesta.equals("2")) { //opcion de modificar 
@@ -165,7 +166,7 @@ public class App {
 	}
 
 	private static String actualizarMagos() throws IOException { //guarda todo el txt en una linea separada por ";"
-		File arc =new File("txts/Magos.txt");
+		File arc =new File("txts/Magos.txt"); //para luego re escribirlo todo denuevo 
 		Scanner sArc = new Scanner(arc);
 		String archivo= "No";
 		while (sArc.hasNextLine()) {

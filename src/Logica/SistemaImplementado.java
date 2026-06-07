@@ -69,25 +69,25 @@ public class SistemaImplementado implements Sistema {
 	}
 	@Override
 	public void agregarMago(String nombreMago, String lineaHechizos, String linea) throws IOException {
-		int cantMagos = magos.size();
-		magos.clear();
+		int cantMagos = magos.size(); //almacena la cantidad de magos 
+		magos.clear(); // reinicia magos como es static 
 		FileWriter writerRegistro = new FileWriter("txts/Magos.txt"); // se resetea el achivo 
 		BufferedWriter escritor =new BufferedWriter(writerRegistro); //y se procede a recrear
-		escritor.write(nombreMago+";"+lineaHechizos);
-		escritor.close();
-		String[] partes =linea.split("🐟"); //??¿¿
-		for (int i=0; i<cantMagos;i++) {
-			recargarTxtMagos(partes[i]);
-		}
+		escritor.write(nombreMago+";"+lineaHechizos); //escribe el mago ingresado 
+		escritor.close(); //cierra es escritor para que se guarde 
+		String[] partes =linea.split("🐟"); //??¿¿ //separa las el txt (completo separado por "🐟") en diferentes partes
+		for (int i=0; i<cantMagos;i++) { //ciclo por el total antiguo de magos 
+			recargarTxtMagos(partes[i]); //añade mago por magos 
+		} // y así hasta que termina de escribir todos 
 		
 		
 	}
 	private void recargarTxtMagos(String linea) throws IOException {
-		FileWriter writerRegistro = new FileWriter("txts/Magos.txt",true); // se resetea el achivo 
-		BufferedWriter escritor =new BufferedWriter(writerRegistro); //y se procede a recrear
-		escritor.newLine();
-		escritor.write(linea);
-		escritor.close();
+		FileWriter writerRegistro = new FileWriter("txts/Magos.txt",true); //escibe más elementos
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		escritor.newLine(); //salta de linea
+		escritor.write(linea); //rescribe la linea que probiende de la funcion de los "🐟"
+		escritor.close(); //cierra para guardar
 		
 	}
 	
