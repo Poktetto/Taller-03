@@ -1,5 +1,7 @@
 package Logica;
 
+import java.io.IOException;
+
 public interface Sistema {
 	/**
 	 * Crea el objeto de hechizo dependiendo de su tipo y lo almacena
@@ -12,4 +14,25 @@ public interface Sistema {
 	 * @param linea La linea proveniente del txt para crear el hechizo
 	 */
 	void crearHechizo(String linea);
+	/**
+	 *  * Crea el objeto de mago con la lista de sus hechizos y lo almacena
+	 * 
+	 * PRE:
+	 * - El String debe estar separado por 1 ";" y la 2 parte puede debe estar separada por uno o más "|" 
+	 *   para separar los hechizos 
+	 * POST:
+	 * - Se crea el mago con sus hechizos y se almacena en una ArrayList 
+	 * @param linea La linea proveniente del txt para crear el mago
+	 */
+	void crearMago(String linea);
+	
+	void agregarMago(String nombreMago,String lineaHechizos, String linea) throws IOException;
+	
+	String mostrarHechizos(int i);
+	
+	int cantidadHechizos();
+	
+	String unionHechizosMagos(String aniadirHechizo, String Linea);
+
+
 }

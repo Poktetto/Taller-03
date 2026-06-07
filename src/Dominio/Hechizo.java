@@ -12,6 +12,10 @@ public class Hechizo {
 		this.danio = danio;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
 	
 	
 
