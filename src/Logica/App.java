@@ -177,7 +177,22 @@ public class App {
 			
 			
 		}
-		
+		else if (respuesta.equals("3")){
+			System.out.println("--------------------------------");
+			//imprimir todos los magos
+			for (int i=0;i<sistema.cantidadMagos();i++) {
+				System.out.println(sistema.mostrarMagos(i));
+			}
+			System.out.println("--------------------------------");
+			System.out.println("cual mago desea eliminar?");
+			System.out.print(">");
+			String indiceMago= "-1";
+			do {
+				indiceMago = s.nextLine();
+			} while(Integer.parseInt(indiceMago)<0|| Integer.parseInt(indiceMago)>=sistema.cantidadMagos());
+			sistema.eliminarMago(Integer.parseInt(indiceMago), actualizarMagos());
+			cargarMagos();
+		}
 		
 	}
 

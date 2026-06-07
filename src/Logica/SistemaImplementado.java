@@ -125,6 +125,32 @@ public class SistemaImplementado implements Sistema {
 		escritor.close();
 		
 	}
+	@Override
+	public void eliminarMago(int indiceMago, String linea) throws IOException {
+		int cantMagos = magos.size(); 
+		FileWriter writerRegistro = new FileWriter("txts/Magos.txt"); //reiniciar el txt
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		String[] partes =linea.split("🐟"); 
+		String[] magoPartes = partes[0].split(";");
+		//lee el primer mago y ve si es igual 
+		int inicio=1;
+		if(!magos.get(indiceMago).getNombre().equals(magoPartes[0])) {
+			escritor.write(partes[0]); //lo escribe
+			//esto se hace para no crear otro recargarTxtMagos sin el newLine al inicio
+		} else {
+			escritor.write(partes[1]); //rescribe el segundo e indica que lo hizo
+			inicio=2;
+		}
+		escritor.close();
+		for (int i=inicio; i<cantMagos;i++) { //ciclo por el total antiguo de magos 
+			magoPartes= partes[i].split(";"); // separa el mago en partes para conocer su nombre
+			
+			if (!magos.get(indiceMago).getNombre().equals(magoPartes[0])) { //si sus nombres coinciden
+				recargarTxtMagos(partes[i]);
+			}
+		}
+		magos.clear();
+	}
 
 
 }

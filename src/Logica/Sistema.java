@@ -40,7 +40,7 @@ public interface Sistema {
 	
 	public void modificarMago(int numeroMago, String nuevoHechizo, String linea)throws IOException;
 	
-
+	void eliminarMago(int indiceMago, String linea) throws IOException;
 
 
 }

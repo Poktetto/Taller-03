@@ -27,7 +27,9 @@ public class Mago {
 	public void agregarHechizo(String hechizo) {
 		this.hechizosM.add(hechizo);
 	}
-	
+	public String getNombre(){
+		return nombre;
+	}
 	
 	
 	
