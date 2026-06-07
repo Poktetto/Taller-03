@@ -23,6 +23,9 @@ public class Mago {
 	public List<String> getHechizosM() {
 		return hechizosM;
 	}
+	public String getHechizoPorI(int i) {
+		return hechizosM.get(i);
+	}
 
 	public void agregarHechizo(String hechizo) {
 		this.hechizosM.add(hechizo);

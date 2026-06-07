@@ -132,7 +132,7 @@ public class App {
 			System.out.println("Indique el numero del mago a modificar");
 			System.out.print(">");
 			String magoNumero = s.nextLine();
-			int numeroMago=Integer.parseInt(magoNumero);
+			int numeroMago=Integer.parseInt(magoNumero)-1;
 			System.out.println("--------------------------------");
 			System.out.println("¿Que desea modificar?");
 			System.out.println("1) Agregar hechizo");
@@ -168,10 +168,27 @@ public class App {
 					System.out.println("se ha añadido " + sistema.mostrarHechizos(numeroHechizo));
 				}
 				
-			}else if (opcion==2) {
+			}else if (opcion==2) { //opcion eliminar 
+				for (int i=0; i<sistema.cantidadHechizos(numeroMago);i++) {
+					
+					System.out.println(sistema.mostrarMagosHechizo( i,  numeroMago));
+					
+				}
+				System.out.println("--------------------------------");
+				System.out.println("Cual hechizo desea eliminar? ");
+				System.out.print(">");
+				String eliminaHechizo =s.nextLine();
+				int numeroHechizo=	Integer.parseInt(eliminaHechizo)-1;
+				sistema.eliminarHechizo(numeroMago,numeroHechizo); //elimina el hechizo de la lista
 				
-				
-				
+				String linea = actualizarMagos();
+				  
+				 
+				  
+				  sistema.modificarMago(numeroMago,numeroHechizo, linea);
+				  
+				  cargarMagos();
+				  System.out.print("Hechizo eliminado");
 			}
 			
 			

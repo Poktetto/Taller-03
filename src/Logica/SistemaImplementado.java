@@ -37,7 +37,11 @@ public class SistemaImplementado implements Sistema {
 		
 	}
 	public String mostrarMagos(int i) {
-		return i+") "+ magos.get(i).toString();
+		return i+1+") "+ magos.get(i).toString();
+	}
+	public String mostrarMagosHechizo(int i, int numeroMago) {
+	
+		return i+1+") "+ magos.get(numeroMago).getHechizoPorI(i);
 	}
 	public int cantidadMagos() {
 		return magos.size();
@@ -52,20 +56,38 @@ public class SistemaImplementado implements Sistema {
 		return hechizos.size();
 		
 	}
-	public int cantidadHechizos(int mago) {
-		return magos.get(mago).tamanioHechizosM();
+	public int cantidadHechizos(int numeroMago) {
+		return magos.get(numeroMago).tamanioHechizosM();
 		
 	}
 	@Override
-	public String unionHechizosMagos(String aniadirHechizo, String lineaHechizos) {
+	public String unionHechizosMagos(String aniadirHechizo, String lineaHechizos) { //en añadir mago
 		if (lineaHechizos==null) {
 			lineaHechizos = mostrarHechizos(Integer.parseInt(aniadirHechizo)-1);
 			return lineaHechizos;
 		} else {
 			lineaHechizos += "|" + mostrarHechizos(Integer.parseInt(aniadirHechizo)-1);
 			return lineaHechizos;
-		}
-		
+		}	
+	}
+	
+	private String unionHechizosMagos(String []listaHechizos,int numeroHechizo) { //en eliminar hechizo de un mago
+		 String lineaHechizos = "";
+		    boolean primerHechizo = true;
+		    for (int j = 0; j < listaHechizos.length; j++) {
+		        // Si es el hechizo que el usuario quiere borrar, lo ignoramos
+		        if (j == numeroHechizo) {
+		            continue;
+		        }
+
+		        if (primerHechizo) {
+		        	lineaHechizos += listaHechizos[j];
+		            primerHechizo = false;
+		        } else {
+		        	lineaHechizos += "|" +listaHechizos[j];
+		        }
+		    }
+		    return lineaHechizos;	
 	}
 	@Override
 	public void agregarMago(String nombreMago, String lineaHechizos, String linea) throws IOException {
@@ -93,10 +115,46 @@ public class SistemaImplementado implements Sistema {
 	
 	public void agregarHechizo(int numeroMago, int numeroHechizo) {
 		
-		magos.get(numeroMago).agregarHechizo(hechizos.get(numeroHechizo).getNombre());
+		magos.get(numeroMago).agregarHechizo(hechizos.get(numeroHechizo).getNombre()); //agrega el hechizo en la lista de hechizos del mago
 		
 	}
-	public void modificarMago(int numeroMago, String nuevoHechizo, String linea) throws IOException {
+	@Override
+	public void eliminarHechizo(int numeroMago, int numeroHechizo) {
+		magos.get(numeroMago).getHechizosM().remove(numeroHechizo);//bora el hechizo
+	}
+	
+	public void modificarMago(int numeroMago,int numeroHechizo, String linea) throws IOException { //al eliminar hechizo
+			FileWriter writerRegistro = new FileWriter("txts/Magos.txt",false); 
+	    BufferedWriter escritor = new BufferedWriter(writerRegistro);
+	    
+	    String[] partes = linea.split("🐟");
+
+	    
+	    for (int i = 0; i < partes.length; i++) {
+	        String lineaMago = partes[i]; 
+	        if (i == (numeroMago )) {
+	            String[] part2 = lineaMago.split(";"); 
+	            String nombreMago = part2[0]; //nombre del mago
+	            
+	            if (part2.length >= 2 && !part2[1].isEmpty()) {
+	                String[] listaHechizos = part2[1].split("\\|"); // \\para que lea bien
+	                
+	                String nuevosHechizos = unionHechizosMagos(listaHechizos, numeroHechizo);
+	                lineaMago = nombreMago + ";" + nuevosHechizos;
+	            }
+	        }
+	                
+	        escritor.write(lineaMago);
+	        if (i < partes.length - 1) {
+	            escritor.newLine(); //para evitar espacios
+	        	}
+	        }
+	    escritor.close();
+	}// logra borrar y sobreescribir el mago
+	
+	
+	
+	public void modificarMago(int numeroMago, String nuevoHechizo, String linea) throws IOException {//al agregar hechizo
 		magos.clear();
 		
 		FileWriter writerRegistro = new FileWriter("txts/Magos.txt"); 
@@ -107,7 +165,7 @@ public class SistemaImplementado implements Sistema {
 	    
 	    for (int i = 0; i < partes.length; i++) {
 	        String lineaMagoActual = partes[i];
-	        if (i == (numeroMago - 1)) {
+	        if (i == (numeroMago)) {
 	        	lineaMagoActual = lineaMagoActual + "|" + nuevoHechizo;
 	        
 	        }

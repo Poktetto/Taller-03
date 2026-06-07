@@ -41,6 +41,14 @@ public interface Sistema {
 	public void modificarMago(int numeroMago, String nuevoHechizo, String linea)throws IOException;
 	
 	void eliminarMago(int indiceMago, String linea) throws IOException;
+	
+	int cantidadHechizos(int numeroMago);
+	
+	String mostrarMagosHechizo(int i, int numeroMago);
+	
+	void eliminarHechizo(int numeroMago, int numeroHechizo);
+	
+	void modificarMago(int numeroMago,int numeroHechizo, String linea)throws IOException;
 
 
 }
