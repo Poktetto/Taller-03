@@ -1,4 +1,6 @@
 package Logica;
+//Alvaro Sebastian Orrego Ramírez RUT:22185824-7  Carrera: ITI
+//Anita Constanza Rojas Urrutia RUT: 22286335-K  Carrera: ITI
 
 import java.io.File;
 import java.io.IOException;
