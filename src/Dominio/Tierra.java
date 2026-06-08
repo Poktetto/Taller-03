@@ -6,6 +6,6 @@ public class Tierra extends Hechizo {
 	public Tierra(String nombre, String tipo, int danio,int mejoraDefensa) {
 		super(nombre, tipo, danio);
 		this.mejoraDefensa=mejoraDefensa;
+		puntaje=(danio*mejoraDefensa)/2;
 	}
-
 }

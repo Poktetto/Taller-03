@@ -312,6 +312,16 @@ public class SistemaImplementado implements Sistema {
 		}
 		
 	}
+	@Override
+	public String calcularPuntajeI(int i) {
+		double pMax=-99*10^2;
+		double pMin=99*10^2;
+		List<String> listaMax = new ArrayList<>();
+		List<String> listamMin = new ArrayList<>();
+		return ""+hechizos.get(i).getPuntaje();
+		
+		
+	}
 
 
 

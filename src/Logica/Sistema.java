@@ -200,6 +200,7 @@ public interface Sistema {
 	void modificarMago(int numeroMago,int numeroHechizo, String linea)throws IOException;
 	
 	void actualizarHechizosMagos(String nuevoNombre, String antiguoNombre, String linea)throws IOException;
-
+	
+	String calcularPuntajeI(int i);
 
 }

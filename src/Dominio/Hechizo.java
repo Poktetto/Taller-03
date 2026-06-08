@@ -3,7 +3,8 @@ package Dominio;
 public class Hechizo {
 	private String nombre;
 	private String tipo ;
-	private int danio;
+	protected int danio;
+	protected double puntaje;
 	
 	public Hechizo(String nombre, String tipo, int danio) {
 		
@@ -19,7 +20,10 @@ public class Hechizo {
 	public String getTipo() {
 		return tipo;
 	}
-
+	public double getPuntaje() {
+		return puntaje;
+	}
+	
 	
 	
 

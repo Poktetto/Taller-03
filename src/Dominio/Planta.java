@@ -9,6 +9,9 @@ public class Planta extends Hechizo {
 		super(nombre, tipo, danio);
 		this.duracionStun=duracionStun;
 		this.cantPlantas=cantPlantas;
+		puntaje=danio+(duracionStun*cantPlantas);
 	}
+	
+
 
 }

@@ -56,6 +56,10 @@ public class App {
 		
 		switch (respuesta) {
 		case 1: //mostrar Top 10
+	
+			for (int i=0;i<sistema.cantidadHechizos();i++) {
+				sistema.calcularPuntajeI(i);
+			}
 			break;
 		case 2://op mostrar Top 3
 			break;

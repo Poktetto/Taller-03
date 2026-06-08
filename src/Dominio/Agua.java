@@ -9,6 +9,9 @@ public class Agua extends Hechizo {
 		super(nombre, tipo, danio);
 		this.cantidadHeal=cantidadHeal;
 		this.presionDelAgua=presionDelAgua;
+		puntaje=(danio+cantidadHeal+presionDelAgua)*2;
 	}
+	
+
 
 }
