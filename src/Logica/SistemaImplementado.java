@@ -209,6 +209,77 @@ public class SistemaImplementado implements Sistema {
 		}
 		magos.clear();
 	}
+	@Override
+	public void agregarHechizoTxt(String hechizoNuevo, String linea) throws IOException {
+		int cantHechizos = hechizos.size();
+		hechizos.clear();
+		FileWriter writerRegistro = new FileWriter("txts/Hechizos.txt");
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		escritor.write(hechizoNuevo); //escribe el nuevo hechizo
+		escritor.close();
+		String[] partes =linea.split("🦭"); //"🦭🦭🦭"
+		for (int i=0; i<cantHechizos;i++) { 
+			recargarTxtHechizos(partes[i]); 
+		} 
+	}
+	private void recargarTxtHechizos(String linea) throws IOException {
+		FileWriter writerRegistro = new FileWriter("txts/Hechizos.txt",true);
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		escritor.newLine(); 
+		escritor.write(linea); 
+		escritor.close(); 
+		
+		
+	}
+	private void recargarTxtHechizos(String linea, boolean primeraLinea) throws IOException {
+		FileWriter writerRegistro = new FileWriter("txts/Hechizos.txt",true);
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		if (!primeraLinea) {
+			escritor.newLine(); 
+		}
+	
+		escritor.write(linea); 
+		escritor.close(); 
+		
+		
+	}
+	@Override
+	public String mostrarTipoHechizo(int i) {
+		return hechizos.get(i).getTipo();
+	}
+	public void modificarHechizo(int tipo, String datoEntrada, String linea, String nombreOriginal) throws IOException {
+		String[] partes =linea.split("🦭");
+		int cantHechizos = hechizos.size();
+		hechizos.clear();
+		FileWriter writerRegistro = new FileWriter("txts/Hechizos.txt");
+		BufferedWriter escritor =new BufferedWriter(writerRegistro); 
+		escritor.close();
+		if (tipo==1) {
+			for (int i=0;i<cantHechizos;i++) {
+				String[] partesHechizo=partes[i].split(";");
+				if (nombreOriginal.equals(partesHechizo[0])) {
+					
+					FileWriter writerRegistro2 = new FileWriter("txts/Hechizos.txt",true);
+					BufferedWriter escritor2 =new BufferedWriter(writerRegistro2); 
+					if (i!=0) {
+						escritor2.newLine();
+					}
+					escritor2.write(datoEntrada+";"+partesHechizo[1]+";"+partesHechizo[2]+";"+partesHechizo[3]);
+					escritor2.close();
+				} else {
+					boolean primeraLinea=false;
+					if (i==0) {
+						primeraLinea=true;
+					}
+					recargarTxtHechizos(partes[i],primeraLinea);
+					
+				}
+			}
+			
+		}
+		
+	}
+
 
 
 }

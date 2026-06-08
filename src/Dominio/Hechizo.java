@@ -16,6 +16,10 @@ public class Hechizo {
 		return nombre;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
 	
 	
 

@@ -210,7 +210,118 @@ public class App {
 			sistema.eliminarMago(Integer.parseInt(indiceMago), actualizarMagos());
 			cargarMagos();
 		}
+		else if (respuesta.equals("4")) {
+			System.out.println("--------------------------------");
+			System.out.println("cual es el nombre del nuevo hechizo?");
+			System.out.print(">");
+			String nombreHechizo= s.nextLine();
+			System.out.println("--------------------------------");
+			System.out.println("de que tipo es?");
+			System.out.println("1)Fuego");
+			System.out.println("2)Tierra");
+			System.out.println("3)Panta");
+			System.out.println("4)Agua");
+			System.out.println("--------------------------------");
+			String tipoHechizo ="0";
+			do {
+				System.out.print(">");
+				tipoHechizo = s.nextLine();
+			} while (Integer.parseInt(tipoHechizo)<1||Integer.parseInt(tipoHechizo)>4);
+			System.out.println("ingrese daño");
+			int danio = darDatoHechizos();
+			String tipo="";
+			String parte4=""; //para unir las partes para planta y agua
+			if (tipoHechizo.equals("1")) { //si es fuego
+				System.out.println("Ingrese duracion de quemadura");
+				int duracionQuemadura= darDatoHechizos();
+				parte4 =""+duracionQuemadura;
+				tipo="Fuego";
+			} 
+			else if (tipoHechizo.equals("2")) { //si es Tierra
+				System.out.println("Ingrese mejora de defenza");
+				int mejoraDefenza= darDatoHechizos();
+				parte4 = ""+mejoraDefenza;
+				tipo="Tierra";
+			}
+			else if (tipoHechizo.equals("3")) { //si es Planta
+				System.out.println("Ingrese duracion del stun");
+				int duracionStun= darDatoHechizos();
+				System.out.println("Ingrese cantidad de plantas");
+				int cantidadPlantas = darDatoHechizos();
+				parte4= duracionStun+","+cantidadPlantas;
+				tipo="Planta";
+			}
+			else if (tipoHechizo.equals("4")) { //si es Agua
+				System.out.println("Ingrese cantidad de Heal");
+				int cantidadHeal= darDatoHechizos();
+				System.out.println("Ingrese presion del agua");
+				int presionAgua = darDatoHechizos();
+				parte4= cantidadHeal+","+presionAgua;
+				tipo="Agua";
+			}
+			String hechizoNuevo= nombreHechizo+";"+tipo+";"+danio+";"+parte4;
+			sistema.agregarHechizoTxt(hechizoNuevo,actualizarHechizos());
+			cargarHechizos();
+			
+		}
+		else if (respuesta.equals("5")) {
+			System.out.println("--------------------------------");
+			System.out.println("hechizos disponibles");
+			for(int i=0;i<sistema.cantidadHechizos();i++) {
+				System.out.println(i+1+")"+sistema.mostrarHechizos(i));
+			}
+			System.out.println("--------------------------------");
+			System.out.println("cual desea modificar?");
+			int indiceHechizo=0;
+			do {
+				System.out.print(">");
+				indiceHechizo = Integer.parseInt(s.nextLine())-1;
+			}while (indiceHechizo<0||indiceHechizo>sistema.cantidadHechizos());
+			System.out.println("--------------------------------");
+			System.out.println("1)Modificar nombre");
+			System.out.println("2)Modificar daño");
+			System.out.println("3)Modificar tipo");
+			int cosaCambiar=0;
+			if (sistema.mostrarTipoHechizo(indiceHechizo).equals("Fuego")) {
+				System.out.println("4)Modificar duracion de quemadura");
+				do {
+					System.out.print(">");
+					cosaCambiar = Integer.parseInt(s.nextLine())-1;
+				}while (cosaCambiar<0||cosaCambiar>4);
+			}
+			else if (sistema.mostrarTipoHechizo(indiceHechizo).equals("Tierra")) {
+				System.out.println("4)Modificar mejora de defenza");
+				do {
+					System.out.print(">");
+					cosaCambiar = Integer.parseInt(s.nextLine())-1;
+				}while (cosaCambiar<0||cosaCambiar>4);
+			}
+			else if (sistema.mostrarTipoHechizo(indiceHechizo).equals("Planta")) {
+				System.out.println("4)Modificar duracion del Stun");
+				System.out.println("5)Modificar cantidad de plantas");
+				do {
+					System.out.print(">");
+					cosaCambiar = Integer.parseInt(s.nextLine())-1;
+				}while (cosaCambiar<0||cosaCambiar>5);
+			}
+			else if (sistema.mostrarTipoHechizo(indiceHechizo).equals("Agua")) {
+				System.out.println("4)Modificar cantidad de Healing");
+				System.out.println("5)Modificar presion del agua");
+				do {
+					System.out.print(">");
+					cosaCambiar = Integer.parseInt(s.nextLine())-1;
+				}while (cosaCambiar<0||cosaCambiar>5);
+			}
+			//cargar opciones dependiendo del cambio
+			if (cosaCambiar+1==1) { //cambiar nombre
+				String antiguoNombre=sistema.mostrarHechizos(indiceHechizo);
+				System.out.println("--------------------------------");
+				System.out.println("Ingrese nuevoNombre");
+				String nuevoNombre=s.nextLine();
+				sistema.modificarHechizo(1, nuevoNombre, actualizarHechizos(), antiguoNombre);
+			}
 		
+		}
 	}
 
 	private static String actualizarMagos() throws IOException { //guarda todo el txt en una linea separada por ";"
@@ -247,5 +358,28 @@ public class App {
 			
 		}
 	}
-
+	private static int darDatoHechizos() {
+		Scanner s = new Scanner(System.in);
+		int dato1 = -413;
+		do {
+			System.out.print(">");
+			dato1 = Integer.parseInt(s.nextLine());
+		} while(dato1<1);
+		return dato1;
+	}
+	private static String actualizarHechizos() throws IOException{ //guarda todo el txt em una linea separada por "🦭" :D No hacepto preguntas de porque "
+		File arc =new File("txts/Hechizos.txt"); //para luego re escribirlo todo denuevo 
+		Scanner sArc = new Scanner(arc);
+		String archivo= "No";
+		while (sArc.hasNextLine()) {
+			String linea= sArc.nextLine();
+			if (archivo.equals("No")){
+				archivo = linea;
+			} else {
+				archivo +="🦭"+linea;
+			}
+			
+		}
+		return archivo;
+	}
 }
