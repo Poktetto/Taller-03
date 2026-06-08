@@ -172,6 +172,26 @@ public class SistemaImplementado implements Sistema {
 	        
 	        recargarTxtMagos(lineaMagoActual, i == 0);
 	    }
+
+	}
+	public void modificarMago2(int numeroMago, String nuevoHechizo, String linea) throws IOException {//al agregar hechizo
+		
+		FileWriter writerRegistro = new FileWriter("txts/Magos.txt"); 
+	    BufferedWriter escritor = new BufferedWriter(writerRegistro);
+	    escritor.close();
+	    
+	    String[] partes = linea.split("🐟");
+	    
+	    for (int i = 0; i < partes.length; i++) {
+	        String lineaMagoActual = partes[i];
+	        if (i == (numeroMago)) {
+	        	lineaMagoActual = lineaMagoActual + "|" + nuevoHechizo;
+	        
+	        }
+	        
+	        recargarTxtMagos(lineaMagoActual, i == 0);
+	    }
+
 	}
 	private void recargarTxtMagos(String linea, boolean primerMago) throws IOException {
 		FileWriter writerRegistro = new FileWriter("txts/Magos.txt",true); //escibe más elementos
@@ -273,6 +293,19 @@ public class SistemaImplementado implements Sistema {
 					}
 					recargarTxtHechizos(partes[i],primeraLinea);
 					
+				}
+			}
+			
+		}
+		
+	}
+	@Override
+	public void actualizarHechizosMagos(String nuevoNombre, String antiguoNombre, String linea) throws IOException {
+		for (int i=0;i<magos.size();i++) {
+			for (int j=0;j<magos.get(i).tamanioHechizosM();j++) {
+				if (magos.get(i).getHechizoPorI(j).equals(antiguoNombre)) {
+					modificarMago(i,j,linea);
+					modificarMago2(i,nuevoNombre,linea);
 				}
 			}
 			

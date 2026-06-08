@@ -74,7 +74,8 @@ public class App {
 
 	private static void menuAdmin() throws IOException {
 		Scanner s = new Scanner(System.in);
-		
+		String respuesta = " ";
+		do {
 		System.out.println("--------------------------------");
 		System.out.println("1)Agregar Mago");
 		System.out.println("2)Modificar Mago");
@@ -84,7 +85,6 @@ public class App {
 		System.out.println("6)Eliminar Hechizo");
 		System.out.println("7)Salir");
 		System.out.println("--------------------------------");
-		String respuesta = " ";
 		do {
 			System.out.print(">");
 			respuesta = s.nextLine();
@@ -206,8 +206,8 @@ public class App {
 			String indiceMago= "-1";
 			do {
 				indiceMago = s.nextLine();
-			} while(Integer.parseInt(indiceMago)<0|| Integer.parseInt(indiceMago)>=sistema.cantidadMagos());
-			sistema.eliminarMago(Integer.parseInt(indiceMago), actualizarMagos());
+			} while(Integer.parseInt(indiceMago)-1<0|| Integer.parseInt(indiceMago)-1>=sistema.cantidadMagos());
+			sistema.eliminarMago(Integer.parseInt(indiceMago)-1, actualizarMagos());
 			cargarMagos();
 		}
 		else if (respuesta.equals("4")) {
@@ -316,12 +316,19 @@ public class App {
 			if (cosaCambiar+1==1) { //cambiar nombre
 				String antiguoNombre=sistema.mostrarHechizos(indiceHechizo);
 				System.out.println("--------------------------------");
-				System.out.println("Ingrese nuevoNombre");
+				System.out.println("Ingrese nuevo Nombre");
 				String nuevoNombre=s.nextLine();
 				sistema.modificarHechizo(1, nuevoNombre, actualizarHechizos(), antiguoNombre);
+				cargarHechizos();
+				sistema.actualizarHechizosMagos(nuevoNombre, antiguoNombre, actualizarMagos());
+				cargarMagos();
 			}
 		
 		}
+		else if (respuesta.equals("6")) {
+			//si se quiere Eliminar Hechizo
+		}
+		}while (!respuesta.equals("7"));
 	}
 
 	private static String actualizarMagos() throws IOException { //guarda todo el txt en una linea separada por ";"

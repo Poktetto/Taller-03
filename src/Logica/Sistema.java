@@ -80,6 +80,7 @@ public interface Sistema {
 	 * @return el tipo del hechizo del indice indicado
 	 */
 	String mostrarTipoHechizo(int i);
+	//IMPORTANTE
 	/**
 	 * escribir despues 
 	 * PRE:
@@ -132,9 +133,13 @@ public interface Sistema {
 	 */
 	void agregarHechizo(int numeroMago, int aniadirHechizo);
 	/**
-	 * preguntar
-	 * @param numeroMago
-	 * @param nuevoHechizo
+	 * sobrescribe el mago con los nuevos hechhizos
+	 *  * PRE:
+	 * -que exusta mago indice numeroMago
+	 * POST:
+	 * 	 * -re escribe todo el txt con el mago modificado
+	 * @param numeroMago indice mago modificado
+	 * @param nuevoHechizo nombre del nuevo hechizo
 	 * @param linea todo el txt separado por "🐟"
 	 * @throws IOExceptio nen caso de ausencia de error en el writer
 	 */
@@ -182,17 +187,19 @@ public interface Sistema {
 	 */
 	void eliminarHechizo(int numeroMago, int numeroHechizo);
 	/**
-	 * borrar y sobreescribir el mago (no me queda muy claro)
+	 * borrar y sobreescribir el mago con el indice del hechzo
 	 * PRE:
 	 * -que exusta mago indice numeroMago
 	 * POST:
 	 * -re escribe todo el txt con el mago modificado
 	 * @param numeroMago indice mago modificado
-	 * @param numeroHechizo 
+	 * @param numeroHechizo indice hechizo a eliminar
 	 * @param linea todo el txt separado por "🐟"
 	 * @throws IOException en caso de ausencia de error en el writer
 	 */
 	void modificarMago(int numeroMago,int numeroHechizo, String linea)throws IOException;
+	
+	void actualizarHechizosMagos(String nuevoNombre, String antiguoNombre, String linea)throws IOException;
 
 
 }
